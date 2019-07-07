@@ -7,17 +7,17 @@ fun String.truncate(length: Int = 16): String{
 }
 
 fun String.stripHtml(): String {
-    var isTag = false
+    var isHtml = false
     var str = ""
 
     for (i in 0 until this.length) {
-        if(this[i] == '<') isTag = true
+        if(this[i] in "<&") isHtml = true
 
-        if(!isTag && this[i] !in "&\'\"") {
+        if(!isHtml && this[i] !in "&\'\"") {
             str += this[i]
         }
 
-        if(this[i] == '>') isTag = false
+        if(this[i] in ">;") isHtml = false
     }
 
     while(str.contains("  "))
