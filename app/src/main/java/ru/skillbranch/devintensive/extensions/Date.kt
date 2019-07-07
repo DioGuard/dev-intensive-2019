@@ -4,7 +4,21 @@ import java.util.*
 import java.text.SimpleDateFormat
 
 enum class TimeUnits {
-    SECOND, MINUTE, HOUR, DAY
+    SECOND, MINUTE, HOUR, DAY;
+
+    fun plural(value: Int): String {
+        return "$value " + when(this.ordinal) {
+            0 -> if(value / 10 == 1 || value % 10 !in 1..4) "секунд" else {
+                if(value % 10 == 1) "секунду" else "секунды"}
+            1 -> if(value / 10 == 1 || value % 10 !in 1..4) "минут" else {
+                if(value % 10 == 1) "минуту" else "минуты"}
+            2 -> if(value / 10 == 1 || value % 10 !in 1..4) "часов" else {
+                if(value % 10 == 1) "час" else "часа"}
+            3 -> if(value / 10 == 1 || value % 10 !in 1..4) "дней" else {
+                if(value % 10 == 1) "день" else "дня"}
+            else -> "how!"
+        }
+    }
 }
 
 const val SECOND = 1000L
